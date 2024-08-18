@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="container">
+    <div class="alert alert-info d-flex justify-content-between" role="alert">
+        <h5>Available Public Rooms</h5>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-secondary">Log Out</button>
+        </form>
+    </div>
+
+    {% if rooms %}
+    <div class="row equal">
+        {% for room in rooms %}
+        <div class="col-sm-4 d-flex pb-3">
+            <div class="card bg-light mb-3" style="max-width: 18rem;">
+                <div class="card-block">
+                    <h3 class="card-title">{{ room.name }}</h3>
+                    <p class="card-text">It is a public group for this project.</p>
+                    <a href="/{{ room.slug }}" class="btn btn-outline-secondary">Go to Room</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No Rooms Available!</p>
+    {% endif %}
+</div>
+
+{% else %}
+<div class="container">
+    <div class="alert alert-info d-flex justify-content-between" role="alert">
+        <h5>You are not logged in</h5>
+        <a href="{% url 'login' %}" class="btn btn-outline-secondary">Log In</a>
+    </div>
+</div>
+{% endif %}
+
+<br />
+
+{% endblock %}
