@@ -37,4 +37,4 @@ For completeness, the project also includes:
 ### Clone the Repository
 
  ```bash
-    git clone https://github.com/KamilCecko/Realtime-Chat-Application
+    git clone https://github.com/KamilCecko/Realtime-Chat-Application.git
